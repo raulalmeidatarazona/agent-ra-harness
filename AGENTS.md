@@ -60,4 +60,4 @@ docs/
     └── acceptance-bound-to-contract.md    requests and responses checked against the contract
 ```
 
-`harness/` holds the tools that maintain the skills; a project may delete it.
+To change the harness itself (skills, templates, conventions), read `harness/AGENTS.md`. A project may delete `harness/`.
