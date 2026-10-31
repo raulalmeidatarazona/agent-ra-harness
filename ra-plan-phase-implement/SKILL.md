@@ -5,7 +5,7 @@ disable-model-invocation: true
 user-invocable: true
 metadata:
   author: Raúl Almeida (AR Solución Digital), adapted from CodelyTV/agent-harness codely-plan-phase-implement (MIT)
-  version: "1.1"
+  version: "1.2"
   license: MIT
 ---
 
@@ -19,7 +19,7 @@ metadata:
 
 - The plan: the one given, or the latest in `.agents/plans/`. The current phase is the first with an unchecked `- [ ]`. If none, say the plan is complete and stop.
 - Read `AGENTS.md`, `docs/foundations/verification.md`, `testing.md` and `review-checklist.md`. If they are missing, ask once for the verification command and the checklist.
-- Run the full verification command. If it is not green before you start, stop and report: you cannot prove your change otherwise. In a walking skeleton nothing exists yet; the phase builds the command first.
+- Run the full verification command. If it is not green before you start, stop and report: you cannot prove your change otherwise. In a walking skeleton nothing exists yet: the first step builds the verification command in the repository and runs it.
 
 ## Order
 
@@ -53,6 +53,8 @@ In existing code, write characterisation tests before changing behaviour.
 - No in-memory adapters beyond a temporary one the plan allows; delete it in the step that adds the real adapter.
 - No secrets in code, logs or output. Never run `export`, `env` or `printenv`.
 - Do not add dependencies, operations or features the phase does not list.
+- Verification runs inside the repository with its own dependencies. A check run in a temporary workspace or against borrowed declarations proves nothing about this repository.
+- Independent review belongs to the end of a phase that touched money, security, concurrency or data integrity, not to intermediate steps.
 - Report evidence as observed, verified (a command proved it) or inferred.
 
 ## End of phase
