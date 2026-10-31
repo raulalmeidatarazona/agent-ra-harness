@@ -36,7 +36,7 @@ docs/foundations/
   verification.md  review-checklist.md  decisions.md  roadmap.md
 ```
 
-`ra-foundations/resources/examples/` has two stack profiles
+`.agents/skills/ra-foundations/resources/examples/` has two stack profiles
 (PHP/Symfony + MySQL, TypeScript/NestJS + PostgreSQL + LLM).
 
 The `ra-plan-*` and `ra-convention-capture` skills are adapted from
