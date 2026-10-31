@@ -41,7 +41,7 @@ Ask only those the input touches. Each answer becomes a decision and, when it ap
 
 ## 5. Roadmap
 
-- Slice 0: walking skeleton with the verification command, contract anchors, architecture checks and one trivial endpoint or command.
+- Slice 0: walking skeleton and nothing more: the verification command running in the repository, one trivial operation that touches the real infrastructure, the contract anchors and the architecture checks. UI polish, resilience cases and extra tooling belong to the slices that need them.
 - Slices: one per user goal, each deployable alone and never leaving the system in a wrong business state. Riskiest first. A slice includes the UI, security and docs its goal needs; there is no UI, hardening or docs slice.
 - What each slice decides in its own plan (algorithm, indexes, prompt): listed in the roadmap, not decided here.
 - Spikes: time-boxed, before the slice that needs them.

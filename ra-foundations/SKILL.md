@@ -5,7 +5,7 @@ disable-model-invocation: true
 user-invocable: true
 metadata:
   author: Raúl Almeida (AR Solución Digital)
-  version: "1.2"
+  version: "1.3"
   license: MIT
 ---
 
@@ -38,5 +38,5 @@ Questions: [`resources/question-bank.md`](resources/question-bank.md). Templates
 - Slices are user goals, never layers. A slice named after a layer (data, API, UI, hardening, docs) is horizontal: fold it into the goals it serves. Each slice carries its own UI, security and README section.
 - Default to one deployable, SQL and synchronous calls. Choose otherwise only with a concrete reason written as a decision: fashionable architecture costs more to run than it saves.
 - Every architecture rule names the check that enforces it. A rule without a check is a wish.
-- Slice 0 is a walking skeleton: build, verification command, contract anchors and architecture checks, before any feature. Retrofitting the contract later is more expensive.
+- Slice 0 is a walking skeleton and nothing more: the verification command running in the repository, one trivial operation that touches the real infrastructure, the contract anchors and the architecture checks. UI polish, resilience cases and extra tooling belong to the slices that need them. It comes before any feature, because retrofitting the contract later is more expensive.
 - No production code in this skill.
