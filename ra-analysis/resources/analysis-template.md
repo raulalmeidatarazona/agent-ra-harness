@@ -1,5 +1,7 @@
 # Analysis
 
+Repository language: <language>
+
 ## Problem
 
 <Who needs what, why, and what done looks like. At most 5 sentences.>
@@ -16,9 +18,10 @@
 | Criterion | Weight | Where the effort goes |
 |---|---|---|
 
-## Data findings
+## Evidence
 
 - <finding> (verified: `<command>` | observed)
+- <data the solution needs> (assumption, to confirm)
 
 ## Sub-problems
 
@@ -50,9 +53,9 @@ Recommendation: <option> because <reason>. Spike: <question, time box> if needed
 
 ## Worked examples
 
-| Example | Expected result | Computed with |
-|---|---|---|
-| <query or filter from the brief> | <ids or counts> | `<command>` |
+| Case | Input | Expected output | Source |
+|---|---|---|---|
+| <brief example or user goal> | <input> | <output> | `<command>` or assumption |
 
 ## Open questions and spikes
 

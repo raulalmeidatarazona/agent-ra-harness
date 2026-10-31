@@ -13,7 +13,7 @@ npx skills add raulalmeidatarazona/agent-skills --skill <name> --agent claude-co
 | Skill | Purpose |
 |---|---|
 | `create-agent-skill` | Create and validate reusable agent skills for Claude Code, Codex and others |
-| `ra-analysis` | Understand a brief before solving it: requirements, data findings computed with commands, sub-problems, options with costs, high-level design and worked examples that become acceptance fixtures |
+| `ra-analysis` | Understand a brief before solving it: requirements, evidence checked with commands when there is any, sub-problems, options with costs, high-level design and worked examples that become acceptance fixtures |
 | `ra-foundations` | Turn a brief or an existing codebase into the project foundations: mission, architecture, contract, testing, verification, decisions and a roadmap of vertical slices, plus `AGENTS.md`, `CLAUDE.md` and an env-leak hook |
 | `ra-plan-create` | Contract-first, outside-in plan for one roadmap slice: diagnosis, questions first, risk spikes, contracts, cut list, deviations |
 | `ra-plan-phase-implement` | Implement one plan phase outside-in with red/green steps of 3 to 5 files; propose Conventional Commits, never commit alone |
