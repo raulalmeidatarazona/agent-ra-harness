@@ -5,7 +5,7 @@ disable-model-invocation: false
 user-invocable: true
 metadata:
   author: Raúl Almeida (AR Solución Digital)
-  version: "1.1"
+  version: "1.2"
   license: MIT
 ---
 
@@ -52,11 +52,11 @@ metadata:
 |---|---|---|
 | Claude Code | `.claude/skills/` | `~/.claude/skills/` |
 | Codex | `.agents/skills/` | `~/.agents/skills/` (legacy `~/.codex/skills/`) |
-| opencode | | `~/.config/opencode/skills/` or `~/.agents/skills/` |
+| opencode | `.agents/skills/` | `~/.config/opencode/skills/` or `~/.agents/skills/` |
 | Qwen Code | `.qwen/skills/` | `~/.qwen/skills/` or `~/.agents/skills/` |
 | Zed | `.zed/skills/` | `~/.config/zed/skills/` or `~/.agents/skills/` |
 
-`~/.agents/skills/` is the shared global directory; agents that do not read it get a symlink from the skills CLI.
+`~/.agents/skills/` is the shared global directory; agents that do not read it get a symlink from the skills CLI. In agent-ra-harness the skills live in `.agents/skills/`, with `.claude/skills` and `.opencode/skills` as symlinks (`make symlinks`).
 
 ## Install with the skills CLI
 
@@ -71,7 +71,7 @@ Install from GitHub, not from a local path: the lock file would store a path of 
 
 ## Validate
 
-1. The frontmatter parses with a YAML parser, not a regex; `name` matches the folder and the regex; `description` is one sentence.
-2. `npx skills add . --list` lists the skill.
+1. In agent-ra-harness, `make harness-validate`: frontmatter, links, symlinks and template copies. Elsewhere, parse the frontmatter with a YAML parser, not a regex; `name` matches the folder and the regex; `description` is one sentence.
+2. `npx skills add . --list` lists the skill. In agent-ra-harness, add it to a grouping in `skills.sh.json`.
 3. Install it in a throwaway repo and check the copied tree, the symlink and the lock.
-4. Run it once (`claude -p "/<name> ..."`, `codex exec "$<name> ..."`) and read what it does.
+4. Run it once (`claude -p "/<name> ..."`, `codex exec "$<name> ..."`) and read what it does. In agent-ra-harness, a skill whose behaviour matters gets a scenario in `harness/evals/` (see `harness/AGENTS.md`).
