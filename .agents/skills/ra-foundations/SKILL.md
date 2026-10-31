@@ -5,7 +5,7 @@ disable-model-invocation: true
 user-invocable: true
 metadata:
   author: Raúl Almeida (AR Solución Digital)
-  version: "1.3"
+  version: "1.4"
   license: MIT
 ---
 
@@ -13,7 +13,7 @@ metadata:
 
 No foundations, no plan. This skill writes what every later skill reads: a short `AGENTS.md` that maps the repo, and small files in `docs/foundations/` that agents open only when the task needs them.
 
-Questions: [`resources/question-bank.md`](resources/question-bank.md). Templates: `resources/templates/`. Stack examples: `resources/examples/`, read only the one closest to the chosen stack.
+Questions: [`resources/question-bank.md`](resources/question-bank.md). Templates: `resources/templates/`. Stack examples: `resources/examples/`, read only the one closest to the chosen stack. Conventions: [`resources/conventions/README.md`](resources/conventions/README.md).
 
 ## Steps
 
@@ -22,13 +22,14 @@ Questions: [`resources/question-bank.md`](resources/question-bank.md). Templates
 3. **Diagnose** in at most 5 lines: the real problem, what success looks like, what needs no code, what to cut first.
 4. **Interview** in rounds, in the order of the question bank. Each question carries a recommended answer, its reason in one line and one alternative. Skip what the input already answers. For existing code, state observed facts as decisions and ask only where nothing is observed or code and docs disagree. Use the agent's question tool when it has one. Record each answer as a one-line decision.
 5. **Write** the files from the templates in the repository language: the one recorded in the analysis or stated by the user, English if neither. Record it in `AGENTS.md`. Fill only what was decided. Anything unknown goes to `decisions.md` as an open question, with the spike or slice that answers it. Keep each file short (about 60 lines of prose, tables aside) and `AGENTS.md` under 60 lines.
-6. **Trace.** Save the requirements table (from the analysis or step 2) in the Traceability section of `roadmap.md`, keeping its IDs, and give each row its slice or Out of scope. Show the gaps and close them.
-7. **Harness.**
+6. **Conventions.** Copy from `resources/conventions/` the ones that apply to the chosen stack into `docs/<area>/`, adapting the examples to the project's language, and list them in the `AGENTS.md` map. Skip what does not apply; `/ra-doc-create` adds the rest as the project finds them.
+7. **Trace.** Save the requirements table (from the analysis or step 2) in the Traceability section of `roadmap.md`, keeping its IDs, and give each row its slice or Out of scope. Show the gaps and close them.
+8. **Harness.**
    - `ln -s AGENTS.md CLAUDE.md` when `CLAUDE.md` does not exist.
    - Copy `resources/templates/claude/hooks/block-env-leak.sh` to `.claude/hooks/` (`chmod +x`) and merge `resources/templates/claude/settings.json` into `.claude/settings.json`.
    - `.gitignore` must not ignore `*.md`, `docs/` or `.agents/`: the harness lives in the repository.
-8. **Review.** Show the file list and the decisions. Apply each correction yourself in every affected file, so the documents stay consistent.
-9. **Next step.** Propose one commit (`docs: add project foundations`) and offer `/ra-plan-create` for the first slice of the roadmap. Do not commit without approval.
+9. **Review.** Show the file list and the decisions. Apply each correction yourself in every affected file, so the documents stay consistent.
+10. **Next step.** Propose one commit (`docs: add project foundations`) and offer `/ra-plan-create` for the first slice of the roadmap. Do not commit without approval.
 
 ## Rules
 

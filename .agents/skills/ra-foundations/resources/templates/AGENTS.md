@@ -38,5 +38,8 @@ docs/
 │   ├── review-checklist.md  stack-specific review items
 │   ├── decisions.md         decisions, assumptions, open questions
 │   └── roadmap.md           vertical slices and their status
-└── <area>/<convention>.md   conventions captured from corrections
+├── code-style/              how code reads
+├── backend/                 architecture, use cases, wiring
+├── database/                schema, migrations, queries
+└── testing/                 test doubles, fixtures, acceptance
 ```
