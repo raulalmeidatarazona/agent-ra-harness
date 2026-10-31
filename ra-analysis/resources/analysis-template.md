@@ -38,7 +38,7 @@ Cut first: <sub-problem or part of it>.
 |---|---|---|
 | <option> | | |
 
-Recommendation: <option> because <reason>. Spike: <question, time box> if needed.
+Recommendation: <option> because <reason>. Spike: <question, time box> if needed. Deferred: <what will be measured and the criterion that decides>.
 
 ## High-level design
 
@@ -56,6 +56,7 @@ Recommendation: <option> because <reason>. Spike: <question, time box> if needed
 | Case | Input | Expected output | Source |
 |---|---|---|---|
 | <brief example or user goal> | <input> | <output> | `<command>` or assumption |
+| <adversarial case for an untrusted input> | <input> | <output> | synthetic |
 
 ## Open questions and spikes
 
