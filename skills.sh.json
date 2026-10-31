@@ -1,0 +1,31 @@
+{
+	"$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+	"notGrouped": "bottom",
+	"groupings": [
+		{
+			"title": "Understand",
+			"description": "Understand a brief before deciding how to build it.",
+			"skills": ["ra-analysis"]
+		},
+		{
+			"title": "Harness",
+			"description": "Set up the project foundations and grow its conventions and skills.",
+			"skills": ["ra-foundations", "ra-doc-create", "create-agent-skill"]
+		},
+		{
+			"title": "Plan and implement",
+			"description": "Plan one vertical slice and implement it phase by phase, outside-in.",
+			"skills": ["ra-plan-create", "ra-plan-phase-implement"]
+		},
+		{
+			"title": "Quality",
+			"description": "Review the work with a different model.",
+			"skills": ["ra-review-independent"]
+		},
+		{
+			"title": "Git",
+			"description": "Commit each step with a conventional message.",
+			"skills": ["ra-git-conventional-commit"]
+		}
+	]
+}
