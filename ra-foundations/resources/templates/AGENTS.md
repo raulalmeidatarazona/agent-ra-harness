@@ -18,7 +18,7 @@
 ## Rules
 
 - Contract first: `<contract path>` is the source of truth; acceptance tests validate against it.
-- Commits: Conventional Commits, one per step of 3 to 5 files, proposed and made only after approval.
+- Commits: Conventional Commits, subject at most 50 characters, one per step of 3 to 5 files, proposed and made only after approval.
 - Never print or export environment variables.
 
 ## Documentation
