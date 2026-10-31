@@ -41,7 +41,7 @@ metadata:
 ```
 
 - `name`: equal to the folder name; lowercase letters, digits and single hyphens, 1 to 64 characters (`^[a-z0-9]+(-[a-z0-9]+)*$`). Invoked as `/<name>`.
-- `description`: one sentence. If the model may invoke it, say when ("Use when...").
+- `description`: one sentence. If the model may invoke it, say when ("Use when..."). No `: ` inside it unless quoted: YAML reads it as a nested mapping and the skills CLI silently skips the skill.
 - `disable-model-invocation`: `true` for skills with side effects the user must trigger (planning, implementing); `false` lets the model run it when the description matches.
 - `user-invocable`: `true` to allow `/<name>`.
 - `metadata.version`: quoted, bumped when behaviour changes.
@@ -71,7 +71,7 @@ Install from GitHub, not from a local path: the lock file would store a path of 
 
 ## Validate
 
-1. `name` matches the folder and the regex; `description` is one sentence.
+1. The frontmatter parses with a YAML parser, not a regex; `name` matches the folder and the regex; `description` is one sentence.
 2. `npx skills add . --list` lists the skill.
 3. Install it in a throwaway repo and check the copied tree, the symlink and the lock.
 4. Run it once (`claude -p "/<name> ..."`, `codex exec "$<name> ..."`) and read what it does.
