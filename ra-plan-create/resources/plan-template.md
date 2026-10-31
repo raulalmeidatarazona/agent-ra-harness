@@ -72,16 +72,16 @@ created_by:
 
 **Rollback**: <how to undo this phase>
 
-- [ ] Specify: contract operation, pending acceptance test, entry adapter + command/query + empty handler
-- [ ] Design stop: services, ports and domain model agreed with the user
-- [ ] Handler unit test (red)
-- [ ] Domain and services with their unit tests
-- [ ] Handler green
-- [ ] Adapters with integration tests (+ migration)
-- [ ] Acceptance green, failures and repeated requests covered
-- [ ] Docs claim only what the tests prove
-- [ ] Verify with `<command from docs/foundations/verification.md>`. Fix issues if any.
-- [ ] Self-review the diff against `docs/foundations/review-checklist.md`.
+- [ ] (<h:mm>) Specify: contract operation, pending acceptance test, entry adapter + command/query + empty handler
+- [ ] (<h:mm>) Design stop: services, ports and domain model agreed with the user
+- [ ] (<h:mm>) Handler unit test (red)
+- [ ] (<h:mm>) Domain and services with their unit tests
+- [ ] (<h:mm>) Handler green
+- [ ] (<h:mm>) Adapters with integration tests (+ migration)
+- [ ] (<h:mm>) Acceptance green, failures and repeated requests covered
+- [ ] (<h:mm>) Docs claim only what the tests prove
+- [ ] (<h:mm>) Verify with `<command from docs/foundations/verification.md>`. Fix issues if any.
+- [ ] (<h:mm>) Self-review the diff against `docs/foundations/review-checklist.md`.
 - [ ] STOP. Present changes, verification output and commits. Wait for the user.
 
 ## Cut list
