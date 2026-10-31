@@ -23,6 +23,12 @@ Repository language: <language>
 - <finding> (verified: `<command>` | observed)
 - <data the solution needs> (assumption, to confirm)
 
+## Decisions
+
+| ID | Decision | Because | Phase |
+|---|---|---|---|
+| D1 | <choice, or rejected option and why> | <requirement or evidence> | <n> |
+
 ## Sub-problems
 
 | # | Sub-problem | Requirements | Weight | Difficulty | Risk and unknowns |

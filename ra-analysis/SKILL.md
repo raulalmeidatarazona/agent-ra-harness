@@ -5,7 +5,7 @@ disable-model-invocation: true
 user-invocable: true
 metadata:
   author: Raúl Almeida (AR Solución Digital)
-  version: "1.3"
+  version: "1.4"
   license: MIT
 ---
 
@@ -14,6 +14,17 @@ metadata:
 Understand first, solve second. A tool chosen before the problem is understood answers a question nobody asked. This skill picks no stack or framework: `/ra-foundations` does, from what the analysis shows.
 
 Output: `docs/analysis.md` from [`resources/analysis-template.md`](resources/analysis-template.md), written in the repository language: the one the user states, English if they state none. Record it in the file. Talk to the user in the language they use.
+
+## Working files
+
+Each phase is saved as it happens, so a dropped connection or a compacted context loses nothing, and every phase starts from agreed files instead of memory.
+
+- Folder: `.agents/analysis/{YYYY_MM_DD-name}/`, one file per phase (`1-understand.md` ... `5-examples.md`) from [`resources/phase-template.md`](resources/phase-template.md). They live in the project, never inside the skill: an update of the skill replaces its folder.
+- **Start.** If you cannot write files (plan or read-only mode), say so and ask the user to switch before phase 1. If the folder exists, resume: summarise the agreed phases in at most 5 lines and continue at the first phase that is not `agreed`, reading only the files that phase needs.
+- **Before each STOP**, write the phase file with `status: draft`.
+- **After the user answers**, apply the corrections to the file, list them under Corrections and set `status: agreed`. An agreed file changes only through a new Corrections entry.
+- IDs (requirements, decisions, cases, questions) are born in their phase file; the close only consolidates. Timestamps come from `date -u`, never invented.
+- The files are committed with the analysis: they record how the conclusions were reached.
 
 ## Phases
 
@@ -29,7 +40,10 @@ Each phase ends with a summary of at most 10 lines and a **STOP**: wait for agre
 3. **Solutions.** For each sub-problem with a real choice: 2 or 3 options with what each costs (correctness, complexity, time, operations, cost to change later) and a recommendation. The boring option wins unless a requirement or the evidence gives a concrete reason against it. Mark what needs a spike. A choice deferred until something is measured still lists its options and the criterion that will decide it.
 4. **Design at high level.** Components and responsibilities, the flow of each user goal, the main data model and where untrusted input enters. At most one Mermaid diagram.
 5. **Worked examples.** Turn each example of the brief, and each user goal without one, into a concrete case: input and expected output. When there is data to run it on, compute the result with a throwaway command; otherwise write it by hand, label it assumption and confirm it with the user. Every ambiguity a case exposes becomes an open question. Every untrusted input (user text, content sent to an LLM, uploads) gets at least one adversarial case; when the evidence has none, write a synthetic one. These cases are the future acceptance fixtures.
-6. **Close.** Write `docs/analysis.md`, show it, apply corrections and propose a `docs:` commit. Next step: `/ra-foundations`.
+6. **Close.**
+   - Build `docs/analysis.md` only from the agreed phase files.
+   - Contrast it with them in both directions: every requirement, decision, rejected option, worked example and open question of the phase files appears in the final document, and every item of the final document comes from a phase file. Anything new found while closing goes first into its phase file as a Correction. Show the differences and fix them.
+   - Show the result, apply corrections and propose one `docs:` commit with the phase files and `docs/analysis.md`. Next step: `/ra-foundations`.
 
 ## Rules
 
