@@ -18,11 +18,11 @@ npx skills add raulalmeidatarazona/agent-skills --skill <name> --agent claude-co
 | `ra-plan-create` | Contract-first, outside-in plan for one roadmap slice: diagnosis, questions first, risk spikes, contracts, cut list, deviations |
 | `ra-plan-phase-implement` | Implement one plan phase outside-in with red/green steps of 3 to 5 files; propose Conventional Commits, never commit alone |
 | `ra-review-independent` | Read-only review by a different model: reproducible defects and unsupported claims only |
-| `ra-convention-capture` | Turn user corrections into a convention in `docs/`, the review checklist or the decisions log |
+| `ra-doc-create` | Write a convention in `docs/` with good and bad examples, from user corrections or on request |
 
 ## Method and profile
 
-Order on a new project: `ra-analysis` → `ra-foundations` → for each slice `ra-plan-create` → `ra-plan-phase-implement` per phase → `ra-review-independent` where risk is high → `ra-convention-capture` after corrections.
+Order on a new project: `ra-analysis` → `ra-foundations` → for each slice `ra-plan-create` → `ra-plan-phase-implement` per phase → `ra-review-independent` where risk is high → `ra-doc-create` after corrections.
 
 The skills hold the method. What depends on the stack lives in each
 repository, written by `ra-foundations` and read by the other skills:
@@ -39,7 +39,7 @@ docs/foundations/
 `.agents/skills/ra-foundations/resources/examples/` has two stack profiles
 (PHP/Symfony + MySQL, TypeScript/NestJS + PostgreSQL + LLM).
 
-The `ra-plan-*` and `ra-convention-capture` skills are adapted from
+The `ra-plan-*` and `ra-doc-create` skills are adapted from
 [CodelyTV/agent-harness](https://github.com/CodelyTV/agent-harness) (MIT).
 
 Upstream skills are installed directly from their original repositories. The
