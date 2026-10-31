@@ -1,12 +1,13 @@
 ---
 name: "<plan name>"
 description: "<one sentence>"
+slice: "<roadmap slice number and name>"
 created_at: "<YYYY-MM-DDTHH:MM:SSZ>"
 created_by:
-  tool: "<Claude Code | Codex>"
+  tool: "<Claude Code | Codex | ...>"
   model:
-    name: "<e.g. Claude Opus>"
-    version: "<e.g. 4.6>"
+    name: "<model name>"
+    version: "<model version>"
     reasoning_effort: "<low | medium | high>"
 ---
 
@@ -18,14 +19,21 @@ created_by:
 
 ## Context
 
-- Brief: <path>
-- Data: <path>
-- Conventions: `AGENTS.md`, <docs/...>
+- Slice: `docs/foundations/roadmap.md` #<n>
+- Foundations: <the docs this plan relies on>
+- Patterns to copy: <existing files>
 
 ## Decisions
 
 - <choice> instead of <alternative> because <reason>.
-- Out of scope: <...>
+
+**Assumptions**
+
+- <assumption>: <how we will know it is wrong>
+
+**Out of scope**
+
+- <item>
 
 ## Risks and spikes
 
@@ -35,6 +43,7 @@ created_by:
 
 ## Time budget
 
+<!-- only when there is a deadline -->
 | Phase | Budget | Running total |
 |---|---|---|
 | 1 | <0:45> | <0:45> |
@@ -47,38 +56,38 @@ created_by:
 
 **Contracts**
 
-```yaml
-# API
-GET /articles?...
+```<contract format>
+<operation and payloads>
 ```
 
-```ts
-// Handler
-// Port
+```<language from docs/foundations/contract.md>
+// Command/query + handler
+// Domain
+// Ports
 ```
 
 **Tests**
 
 - `<suite>`: <behaviours>
 
-- [ ] Acceptance test (red): <...>
-- [ ] Entry adapter + command/query + handler
-- [ ] Domain + port
-- [ ] In-memory adapter (green)
-- [ ] Concrete adapter + same contract suite
-- [ ] Verify typecheck, lint and all tests with `<command>`. Fix issues if any.
-- [ ] Self-review the diff against the plan guidelines checklist.
-- [ ] STOP. Present changes, verification output and commit messages. Wait for the user.
+**Rollback**: <how to undo this phase>
+
+- [ ] Specify: contract operation, pending acceptance test, entry adapter + command/query + empty handler
+- [ ] Design stop: services, ports and domain model agreed with the user
+- [ ] Handler unit test (red)
+- [ ] Domain and services with their unit tests
+- [ ] Handler green
+- [ ] Adapters with integration tests (+ migration)
+- [ ] Acceptance green, failures and repeated requests covered
+- [ ] Docs claim only what the tests prove
+- [ ] Verify with `<command from docs/foundations/verification.md>`. Fix issues if any.
+- [ ] Self-review the diff against `docs/foundations/review-checklist.md`.
+- [ ] STOP. Present changes, verification output and commits. Wait for the user.
 
 ## Cut list
 
 1. <first thing to cut>
 - Never cut: <...>
-
-## Grading map
-
-| Criterion | Weight | Phase(s) |
-|---|---|---|
 
 ## Deviations
 

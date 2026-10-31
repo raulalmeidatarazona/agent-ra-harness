@@ -1,58 +1,83 @@
 # Plan guidelines
 
+The plan covers one roadmap slice. It cites the foundations instead of repeating them and states only what is new: decisions, contracts, tests and tasks.
+
+## Diagnose first
+
+- Name the real problem in one sentence: a plan for the wrong problem is waste however good it is.
+- Say what can be solved without code (configuration, data, a document): the cheapest change is no change.
+- Prefer the smallest reversible change: it is cheaper to review and to undo.
+
 ## Principles
 
-- **Contract first.** The HTTP contract is a hand-written OpenAPI file and the source of truth. No framework decorators generate it. Tests validate responses against it.
-- **Outside-in.** Inside each phase the order is: acceptance test (red) → entry adapter + command/query + handler → domain (aggregates, value objects) + ports → in-memory adapter (green) → concrete adapters (SQL, LLM, HTTP clients) → same contract tests against the concrete adapter.
-- **Ports are born from use cases**, not from tables. The schema is derived from the ports, at the end of the phase.
-- **Vertical slices.** Each phase delivers a goal a user can complete through every layer it needs, builds, passes verification alone, and never leaves the system in a wrong business state. Never split a feature by layers across phases.
-- **Phase 1 is visible:** something the user can call, see or run.
-- **Don't gold-plate.** Anything not required goes to the cut list or "With more time".
+- **Contract first.** The contract in `docs/foundations/contract.md` is the source of truth and its anchors fail when code diverges. Tie contracts down in the plan: whatever the plan leaves open, the implementing agent decides.
+- **Vertical slices.** Each phase is a user goal through every layer it needs, can go to production alone and never leaves the system in a wrong business state. Never split by layers: a backend phase without its consumer hides design errors until later.
+- **Phase 1 is visible:** something the user can call, see or run, for early feedback.
+- **Boring defaults.** One deployable, SQL, synchronous calls. Anything else is a decision with a concrete reason.
+- **Don't gold-plate.** Anything not required goes to the cut list or Out of scope, so the agent does not invent features.
+
+## Order inside a phase (outside-in)
+
+1. **Specify.** The contract operation with every response a client can receive, the acceptance test marked pending, and the entry adapter + command/query + handler doing nothing. The suite stays green.
+2. **Design stop.** With the skeleton in front of you, confirm or revise the services, ports and domain model (aggregates, value objects, invariants) the plan proposed. This is the most important step: present it and wait for agreement; a change is a deviation.
+3. **Handler unit test, red.** It fails because the services and models do not exist yet. Ports are mocked.
+4. **Domain and services.** Unit tests and implementation, one concept at a time.
+5. **Handler green.** Implement the orchestration inside its transaction boundary.
+6. **Adapters last.** Each port implementation with an integration test against real infrastructure, plus unit tests for its own logic. Migrations here: the schema derives from the ports, not the other way round.
+7. **Acceptance green.** Remove the pending mark, then cover failures and repeated requests.
+8. **Document** only what the tests prove.
+
+No in-memory adapters. A temporary one may unblock a port before its adapter exists; delete it in the step that adds the real adapter, because a double tested only by itself drifts.
+
+## Questions per phase
+
+Answer only those the phase touches, as decisions or contract details: concurrency, retries, idempotency, partial failure, timeouts, transactions, backpressure, observability, security. They are cheap to decide in the contract and expensive to retrofit.
+
+## Existing code
+
+- Characterisation tests first: they pin today's behaviour, so a change that breaks it is visible.
+- Introduce a port at the seam you need instead of rewriting: the old code keeps working behind it.
+- Modernise one slice at a time, each one deployable.
+- Every phase says how to roll it back.
 
 ## Public contracts per phase
 
-Only the types that change, grouped:
+Only what changes, in the language of `docs/foundations/contract.md`:
 
-- API endpoints and payloads (OpenAPI paths and schemas).
+- Contract operations (endpoints, RPCs, commands, events) and payloads.
 - Commands/queries and handler signatures.
-- Domain: aggregates, value objects and their invariants.
-- Ports (driven interfaces) and which adapters implement them.
-- Domain events and attributes.
+- Domain: aggregates, value objects, invariants.
+- Ports and the adapters that implement them.
+- Domain events.
 - Database schema: tables, columns, indexes, each index with the query it serves.
-- LLM: prompt version, output schema, guardrails (input cap, cache key, budget).
-- Test suites and the behaviours each one covers.
-- UI copy.
+- Only if the slice has them: LLM (prompt version, output schema, guardrails), UI copy.
 
-## Test strategy (prove each behaviour once, at the cheapest level)
+## Test strategy
 
-- One acceptance test per user goal, through the public API or UI.
-- Domain and handler unit tests for the rules, cases picked by equivalence partitioning and boundary values.
-- One adapter contract suite per port, run against the in-memory and the concrete adapter.
-- A few browser tests only for what only a browser proves (XSS, stale responses).
-- Never test the same behaviour twice at different levels.
-- Name the exact fixtures and expected IDs when the task gives them.
+Follow `docs/foundations/testing.md`. Prove each behaviour once, at the cheapest level. Name the exact fixtures and expected values when the input gives them.
 
 ## Plan sections
 
 1. **Goal**: 1-3 sentences.
-2. **Context**: linked files, docs from `AGENTS.md`, inputs (brief, sample data).
-3. **Decisions**: one line each, `X instead of Y because Z`. End with **Out of scope**.
+2. **Context**: roadmap slice, foundations docs used, existing code to copy patterns from.
+3. **Decisions**: new ones only, `X instead of Y because Z`. Then **Assumptions** and **Out of scope**.
 4. **Risks and spikes**: risk, how we find out early, time box.
-5. **Time budget**: per phase, and the running total.
-6. **Phases**: description, contracts, tests, tasks (checkboxes). Tasks cite existing code to copy patterns from.
-7. **Cut list**: what to cut first if behind schedule, in order. And **Never cut**.
-8. **Grading map** (assignments only): which phase earns each grading criterion.
-9. **Deviations**: empty at creation; filled during implementation.
-10. **Next step**: one sentence.
+5. **Time budget**: only when there is a deadline.
+6. **Phases**: description, contracts, tests, tasks (checkboxes), rollback.
+7. **Cut list** and **Never cut**.
+8. **Deviations**: empty at creation; filled during implementation.
+9. **Next step**: one sentence.
 
 ## Every phase ends with these three tasks, in this order
 
-1. Verify typecheck, lint and all tests with the project's verification command. Fix issues if any.
-2. Self-review the diff: architecture boundaries (domain imports no infrastructure), no secrets, no `SELECT *`, no `OFFSET` pagination, no rendering of untrusted HTML, docs claim only what tests prove.
-3. **STOP.** Present the changes, the verification output and suggested commit messages. Do not continue until the user asks.
+1. Run the full verification command from `docs/foundations/verification.md`. Fix issues if any.
+2. Self-review the diff against `docs/foundations/review-checklist.md`.
+3. **STOP.** Present the changes, the verification output and the proposed commits. Do not continue until the user asks.
 
 ## Writing
 
-- English. Short. No `—` character. Use `:` or `-`.
+- English. Short. No em dash (U+2014). Use `:` or `-`.
+- Concise: the detail lives in contracts and tests. A decision the contracts already show is not repeated in Decisions, and nothing from the foundations is restated.
+- Label claims: fact, assumption, hypothesis or decision; evidence as observed, verified (a command proved it) or inferred. The reader must know what to check.
 - Every `- [ ]` is a task; use checkboxes only for tasks.
 - No closing slogans or mascots.
