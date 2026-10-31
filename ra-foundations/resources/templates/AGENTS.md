@@ -27,6 +27,7 @@ Read only the docs relevant to your task:
 
 ```
 docs/
+├── analysis.md              problem, data findings, options, worked examples
 ├── foundations/
 │   ├── mission.md           why, users, scope, out of scope
 │   ├── architecture.md      layers, dependency rules, where things go
