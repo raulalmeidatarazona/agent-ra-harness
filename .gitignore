@@ -1,0 +1,16 @@
+# Dependencies, build output and test artifacts
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Local secrets; keep a safe example tracked
+.env
+.env.*
+!.env.example
+
+# Local machine files
+.DS_Store
+*.log
+
+# Documentation, plans and agent configuration stay tracked: never ignore *.md, docs/ or .agents/.

@@ -1,0 +1,20 @@
+agent-ra-harness
+Copyright (c) 2026 Raúl Almeida
+
+Parts of this project are adapted from CodelyTV/agent-harness
+(https://github.com/CodelyTV/agent-harness), commit 5bba758, by Codely
+(https://codely.com). Its skills declare the MIT License.
+
+Adapted parts:
+
+- ra-plan-create: codely-plan-create, codely-plan-create-subagents and the
+  codely-spec-plan OpenSpec schema.
+- ra-plan-phase-implement: codely-plan-phase-implement.
+- ra-doc-create: codely-doc-create and docs/documentation-guidelines.md.
+- ra-git-conventional-commit: codely-git-conventional-commit.
+- docs/database/new-tables.md, not-null-by-default.md,
+  text-with-check-over-varchar.md, table-naming.md, docs/backend/
+  hexagonal-architecture.md, dependency-injection.md, thin-controllers.md,
+  docs/code-style/explicit-return-types.md, docs/testing/object-mothers.md
+  and hand-written-mocks.md: the conventions of the same name in its docs/.
+- The env leak hook: its .claude/settings.json PreToolUse hook.

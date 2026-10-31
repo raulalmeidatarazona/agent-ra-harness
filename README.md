@@ -1,47 +1,58 @@
-# Personal agent skills
+# agent-ra-harness
 
-Skills customized for my AI agents. They follow the standard `SKILL.md`
-directory layout and can be installed with the official `skills` CLI.
+A template for TypeScript projects built with coding agents (Claude Code, Codex, opencode). It brings a method that goes from a brief to reviewed commits, the skills that run it, and conventions with good and bad examples, so every agent works the same way on every project.
 
-Per project (copies to `.agents/skills/`, which Codex reads, symlinks
-`.claude/skills/` and writes `skills-lock.json`):
+## Start a project
 
 ```bash
-npx skills add raulalmeidatarazona/agent-skills --skill <name> --agent claude-code --agent codex --yes
+gh repo create <name> --template raulalmeidatarazona/agent-ra-harness --public --clone
+cd <name>
 ```
+
+Put the brief and any sample data in `docs/brief/`, open your agent in the repository and run:
+
+1. `/ra-analysis docs/brief/<brief>`: understand the problem, check the data, compare options, write the expected results.
+2. `/ra-foundations`: fill `AGENTS.md`, write `docs/foundations/` and keep the conventions that fit the stack.
+3. `/ra-plan-create` for slice 0, then `/ra-plan-phase-implement` phase by phase.
+
+Talk to the agent in any language; the repository stays in English unless you say otherwise. The full flow is in [`docs/method.md`](docs/method.md).
+
+## Inside
+
+| Path | What it is |
+|---|---|
+| `AGENTS.md` | The agent's entry point: commands, architecture, rules and the map of `docs/`. `CLAUDE.md` links to it |
+| `docs/method.md` | How work flows from a brief to a commit |
+| `docs/<area>/` | Conventions with good and bad examples: code style, backend, database, testing |
+| `.agents/skills/` | The skills. Codex and opencode read them here; `.claude/skills` links here |
+| `.claude/` | Settings and a hook that blocks commands printing environment variables |
+| `harness/` | Validation and evals to maintain the harness; a project may delete it |
+
+## Skills
 
 | Skill | Purpose |
 |---|---|
-| `create-agent-skill` | Create and validate reusable agent skills for Claude Code, Codex and others |
-| `ra-analysis` | Understand a brief before solving it: requirements, evidence checked with commands when there is any, sub-problems, options with costs, high-level design and worked examples that become acceptance fixtures |
-| `ra-foundations` | Turn a brief or an existing codebase into the project foundations: mission, architecture, contract, testing, verification, decisions and a roadmap of vertical slices, plus `AGENTS.md`, `CLAUDE.md` and an env-leak hook |
-| `ra-plan-create` | Contract-first, outside-in plan for one roadmap slice: diagnosis, questions first, risk spikes, contracts, cut list, deviations |
-| `ra-plan-phase-implement` | Implement one plan phase outside-in with red/green steps of 3 to 5 files; propose Conventional Commits, never commit alone |
-| `ra-review-independent` | Read-only review by a different model: reproducible defects and unsupported claims only |
-| `ra-doc-create` | Write a convention in `docs/` with good and bad examples, from user corrections or on request |
+| `ra-analysis` | Understand a brief before solving it: requirements, evidence checked with commands, options, high-level design and worked examples. Saves each phase and resumes after a cut |
+| `ra-foundations` | Turn the analysis into foundations: mission, architecture, contract, testing, verification, decisions and a roadmap of vertical slices |
+| `ra-plan-create` | Plan one slice: contracts, tests, estimates that fit the budget, review cadence per phase, cut list |
+| `ra-plan-phase-implement` | Implement one phase outside-in with TDD in steps of 3 to 5 files, verified in the repository |
+| `ra-git-conventional-commit` | One commit per step with a Conventional Commits message |
+| `ra-review-independent` | Read-only review by a different model: reproducible defects and unsupported claims |
+| `ra-doc-create` | Write a convention with good and bad examples, from corrections or on request |
+| `create-agent-skill` | Create and validate a new skill |
 
-## Method and profile
+## Skills without the template
 
-Order on a new project: `ra-analysis` → `ra-foundations` → for each slice `ra-plan-create` → `ra-plan-phase-implement` per phase → `ra-review-independent` where risk is high → `ra-doc-create` after corrections.
-
-The skills hold the method. What depends on the stack lives in each
-repository, written by `ra-foundations` and read by the other skills:
-
-```
-docs/analysis.md                   written by ra-analysis
-AGENTS.md                          short map: commands, architecture, rules, docs tree
-CLAUDE.md -> AGENTS.md
-docs/foundations/
-  mission.md  architecture.md  contract.md  testing.md
-  verification.md  review-checklist.md  decisions.md  roadmap.md
+```bash
+npx skills add raulalmeidatarazona/agent-ra-harness --skill <name> --agent claude-code --agent codex --agent opencode --yes
 ```
 
-`.agents/skills/ra-foundations/resources/examples/` has two stack profiles
-(PHP/Symfony + MySQL, TypeScript/NestJS + PostgreSQL + LLM).
+The conventions live in [`docs/`](docs/) of this repository; copy the ones you need.
 
-The `ra-plan-*` and `ra-doc-create` skills are adapted from
-[CodelyTV/agent-harness](https://github.com/CodelyTV/agent-harness) (MIT).
+## Maintain the harness
 
-Upstream skills are installed directly from their original repositories. The
-dotfiles repository keeps the global installation list and invokes the same
-command through `dot-skills`.
+Read [`harness/AGENTS.md`](harness/AGENTS.md). `make harness-validate` checks skills, links, symlinks and template copies; `make harness-eval SCENARIO=<name>` runs a skill against a scenario with `claude -p`.
+
+## License
+
+MIT, see [`LICENSE`](LICENSE). Parts are adapted from [CodelyTV/agent-harness](https://github.com/CodelyTV/agent-harness); see [`NOTICE`](NOTICE).
