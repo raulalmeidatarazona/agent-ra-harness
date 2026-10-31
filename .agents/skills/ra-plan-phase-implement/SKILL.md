@@ -1,11 +1,11 @@
 ---
 name: ra-plan-phase-implement
-description: Implement exactly one phase of a plan outside-in with TDD, in steps of 3 to 5 files, verifying each step and stopping for review. Never commits without the user's go-ahead.
+description: Implement exactly one phase of a plan outside-in with TDD, in steps of 3 to 5 files, verifying each step and stopping for review at the cadence the plan sets. Never pushes.
 disable-model-invocation: true
 user-invocable: true
 metadata:
   author: Raúl Almeida (AR Solución Digital), adapted from CodelyTV/agent-harness codely-plan-phase-implement (MIT)
-  version: "1.2"
+  version: "1.3"
   license: MIT
 ---
 
@@ -13,7 +13,7 @@ metadata:
 
 > [!CRITICAL]
 > ONE phase per invocation. Then STOP.
-> Never commit or push unless the user says so for that step.
+> Never push. Commit only a step the user approved, or any step of a phase whose cadence in the plan is `phase`.
 
 ## Before starting
 
@@ -42,7 +42,9 @@ In existing code, write characterisation tests before changing behaviour.
 2. **Red first.** Write the test. Run it. Show it fails for the right reason (paste the failing line). Specify steps keep the acceptance test pending instead, so the suite stays green.
 3. **Green.** Minimum code to pass. Tests and implementation may share the step. Touch only the announced files; if you need more, stop and say why.
 4. **Prove it.** Run the narrow test, then the suite of that layer. Paste the summary lines, not whole logs.
-5. **Show** `git diff --stat` and propose one Conventional Commit: `type(scope): imperative summary` of at most 50 characters counting type and scope (drop the scope when it does not fit), body wrapped at 72 with what and why. Wait for "commit" or for corrections.
+5. **Commit** following the phase cadence in the plan (`step` when unset):
+   - `step`: show `git diff --stat` and the proposed message, and wait for "commit" or for corrections; then commit with `/ra-git-conventional-commit`.
+   - `phase`: commit with `/ra-git-conventional-commit` and continue. Still stop at the design stop, on any deviation and at the end of the phase.
 6. **Check the task** in the plan.
 
 ## Rules while implementing
@@ -59,7 +61,7 @@ In existing code, write characterisation tests before changing behaviour.
 
 ## End of phase
 
-1. Run the full verification command. Paste the summary.
+1. Run the full verification command. Paste the summary. With cadence `phase`, list the phase commits (`git log --oneline <first>^..HEAD`) so the user reviews them one by one.
 2. Self-review the diff against `docs/foundations/review-checklist.md`.
 3. Update the plan: checkboxes, **Deviations**, **Next step**, and frontmatter:
 

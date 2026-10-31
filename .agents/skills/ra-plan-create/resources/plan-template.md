@@ -54,6 +54,8 @@ created_by:
 
 <What the user can do at the end of this phase>
 
+**Cadence**: <step | phase>, because <reason>
+
 **Contracts**
 
 ```<contract format>
