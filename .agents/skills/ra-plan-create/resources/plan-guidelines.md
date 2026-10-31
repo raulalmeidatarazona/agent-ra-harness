@@ -14,7 +14,7 @@ The plan covers one roadmap slice. It cites the foundations instead of repeating
 - **Vertical slices.** Each phase is a user goal through every layer it needs, can go to production alone and never leaves the system in a wrong business state. Never split by layers: a backend phase without its consumer hides design errors until later.
 - **Phase 1 is visible:** something the user can call, see or run, for early feedback.
 - **Boring defaults.** One deployable, SQL, synchronous calls. Anything else is a decision with a concrete reason.
-- **Walking skeleton** (slice 0): the verification command running in the repository, one trivial operation that touches the real infrastructure, the contract anchors and the architecture checks. UI polish, resilience cases and extra tooling belong to the slices that need them.
+- **Walking skeleton** (slice 0): the verification command running in the repository, one trivial operation that touches the real infrastructure, the contract anchors and the architecture checks. UI polish, resilience cases and extra tooling belong to the slices that need them. Its first task builds the verification command (toolchain, lint, types, an empty test run), so every later task is verified in the repository.
 - **Spikes** answer a question whose answer changes the design. Checking that mainstream versions install together is not one: the first step finds out.
 - **Don't gold-plate.** Anything not required goes to the cut list or Out of scope, so the agent does not invent features.
 
