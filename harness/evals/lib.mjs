@@ -16,8 +16,11 @@ export const section = (text, heading) => {
   return text.slice(start, next === -1 ? undefined : next);
 };
 
+const caseLabels = /\b[A-Z]+\d+\b/g;
+const datesWithTheirCounts = /\d{4}-\d{2}(-\d{2})?(\s*[:=|]\s*\d+)?/g;
+
 export const idsIn = (line) =>
-  new Set((line.replace(/\b[A-Z]+\d+\b/g, '').replace(/\d{4}-\d{2}(-\d{2})?/g, '').match(/\b\d+\b/g) ?? []).map(Number));
+  new Set((line.replace(caseLabels, '').replace(datesWithTheirCounts, '').match(/\b\d+\b/g) ?? []).map(Number));
 
 export function analysisPhases() {
   const [folder] = list('.agents/analysis');
