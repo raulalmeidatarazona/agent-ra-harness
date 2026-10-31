@@ -5,7 +5,7 @@ disable-model-invocation: true
 user-invocable: true
 metadata:
   author: Raúl Almeida (AR Solución Digital), adapted from CodelyTV/agent-harness codely-plan-create + codely-spec-plan (MIT)
-  version: "1.2"
+  version: "1.3"
   license: MIT
 ---
 
@@ -22,7 +22,7 @@ Structure and rules: [`resources/plan-guidelines.md`](resources/plan-guidelines.
 5. **Risk spikes.** If a decision depends on how a technology really behaves, propose a time-boxed throwaway spike before the phase that needs it. A spike produces findings, never production code.
 6. **Granularity.** Offer: minimum (1 phase), intermediate (2-3), granular (4+), each with the phases it would contain. The user picks.
 7. **Contracts.** For each phase propose the public contracts (see guidelines). Get explicit agreement on contracts and phases. **Do not write the plan file before that agreement.**
-8. **Save** to `.agents/plans/{YYYY_MM_DD-name}/{YYYY_MM_DD-name}-plan.md` using the template. Plan content in English. Mark the slice `planned` in `roadmap.md`.
+8. **Save** to `.agents/plans/{YYYY_MM_DD-name}/{YYYY_MM_DD-name}-plan.md` using the template. Plan content in the repository language from `AGENTS.md` (English if unset). Mark the slice `planned` in `roadmap.md`.
 9. **Next step.** Offer exactly these options:
    - Nothing else.
    - Commit the plan (`docs(plan): ...`).

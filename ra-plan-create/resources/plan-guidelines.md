@@ -76,7 +76,7 @@ Follow `docs/foundations/testing.md`. Prove each behaviour once, at the cheapest
 
 ## Writing
 
-- English. Short. No em dash (U+2014). Use `:` or `-`.
+- The repository language from `AGENTS.md`, English if unset. Short. No em dash (U+2014). Use `:` or `-`.
 - Concise: the detail lives in contracts and tests. A decision the contracts already show is not repeated in Decisions, and nothing from the foundations is restated.
 - Label claims: fact, assumption, hypothesis or decision; evidence as observed, verified (a command proved it) or inferred. The reader must know what to check.
 - Every `- [ ]` is a task; use checkboxes only for tasks.

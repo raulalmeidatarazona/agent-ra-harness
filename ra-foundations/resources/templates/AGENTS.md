@@ -17,6 +17,7 @@
 
 ## Rules
 
+- Repository language: <language>, whatever language the conversation uses.
 - Contract first: `<contract path>` is the source of truth; acceptance tests validate against it.
 - Commits: Conventional Commits, subject at most 50 characters, one per step of 3 to 5 files, proposed and made only after approval.
 - Never print or export environment variables.
@@ -27,7 +28,7 @@ Read only the docs relevant to your task:
 
 ```
 docs/
-├── analysis.md              problem, data findings, options, worked examples
+├── analysis.md              problem, evidence, options, worked examples
 ├── foundations/
 │   ├── mission.md           why, users, scope, out of scope
 │   ├── architecture.md      layers, dependency rules, where things go

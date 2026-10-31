@@ -5,7 +5,7 @@ disable-model-invocation: true
 user-invocable: true
 metadata:
   author: Raúl Almeida (AR Solución Digital)
-  version: "1.1"
+  version: "1.2"
   license: MIT
 ---
 
@@ -21,7 +21,7 @@ Questions: [`resources/question-bank.md`](resources/question-bank.md). Templates
 2. **Extract** (skip with an analysis: reuse its requirements, IDs and diagnosis) every requirement into a table: requirement, source (brief line or `file:line`), label (fact, assumption or open question). Add the implicit ones and say what implies them (untrusted input implies output escaping). For existing code, also read `git log --oneline` and the tests, and mark each finding observed or inferred.
 3. **Diagnose** in at most 5 lines: the real problem, what success looks like, what needs no code, what to cut first.
 4. **Interview** in rounds, in the order of the question bank. Each question carries a recommended answer, its reason in one line and one alternative. Skip what the input already answers. For existing code, state observed facts as decisions and ask only where nothing is observed or code and docs disagree. Use the agent's question tool when it has one. Record each answer as a one-line decision.
-5. **Write** the files from the templates, in English whatever the conversation language. Fill only what was decided. Anything unknown goes to `decisions.md` as an open question, with the spike or slice that answers it. Keep each file short (about 60 lines of prose, tables aside) and `AGENTS.md` under 60 lines.
+5. **Write** the files from the templates in the repository language: the one recorded in the analysis or stated by the user, English if neither. Record it in `AGENTS.md`. Fill only what was decided. Anything unknown goes to `decisions.md` as an open question, with the spike or slice that answers it. Keep each file short (about 60 lines of prose, tables aside) and `AGENTS.md` under 60 lines.
 6. **Trace.** Save the requirements table (from the analysis or step 2) in the Traceability section of `roadmap.md`, keeping its IDs, and give each row its slice or Out of scope. Show the gaps and close them.
 7. **Harness.**
    - `ln -s AGENTS.md CLAUDE.md` when `CLAUDE.md` does not exist.
